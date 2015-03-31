@@ -1,6 +1,6 @@
 ;**************************************************************************************************
 ; Music-Chooser by Superritchman
-; Version: 1.0
+; Version: 1.0.1
 ;
 ; # How to use?
 ;
@@ -35,6 +35,16 @@ PColor := "009E5A"	; Font-Color while playing 	- Default: 009E5A (7F7F7F = invis
 #SingleInstance ignore
 DetectHiddenWindows, On
 SetTitleMatchMode, 2
+
+; Proof user settings
+if (GUIShown = "" || GUIShown is not boolean) 	
+	GUIShown := True
+if (FontSize = "" || FontSize is not integer || FontSize < 1)	
+	FontSize := 14	
+if (SColor = "" || SColor is not xdigit)	
+	SColor := "C94545"	
+if (PColor = "" || PColor is not xdigit)
+	PColor := "009E5A"
 
 ; Draw gui at the beginning
 UpdateGui(Songname, MusicPaused, GUIShown)
@@ -83,7 +93,7 @@ UpdateGui(Songname, MusicPaused, GUIShown)
 			{
 				MusicPaused := PauseScript(Filename, True)
 				UpdateGui(Songname, MusicPaused, GUIShown)	; UpdateGUI
-				WinWaitActive, %WindowTitle%	; hotkeys stopped 'til GW 2 is back in focus!
+				WinWaitActive, %WindowTitle%	; Hotkeys stopped until GW 2 is back in focus!
 			}
 		}
 	}
@@ -119,10 +129,10 @@ Esc::
 	if(MusicPID > 0)
 		StopMusic(MusicPID)
 	ExitApp
-return	; just in case
+return
 
 ; Updating the GUI
-UpdateGui(MusicTitle, isPaused := True, show := False)
+UpdateGui(MusicTitle, isPaused, show)
 {	
 	; Destroy old window (to handle resizing)
 	Gui, Music:Destroy
@@ -165,7 +175,7 @@ StopMusic(PID)
 
 ; Thanks to RHCP
 ; http://www.autohotkey.com/board/topic/102235-script-to-deactivateactivate-another-script/?p=634811
-PauseScript(ScriptTitle, pauseScript := False)
+PauseScript(ScriptTitle, pauseIt)
 {
 	if (script_id := WinExist(ScriptTitle " ahk_class AutoHotkey"))
 	{
@@ -178,8 +188,8 @@ PauseScript(ScriptTitle, pauseScript := False)
 		isPaused := DllCall("GetMenuState", "uint", fileMenu, "uint", 4, "uint", 0x400) >> 3 & 1		
 		DllCall("CloseHandle", "uint", fileMenu)
 		DllCall("CloseHandle", "uint", mainMenu)
-		if (pauseScript && !isPaused) || (!pauseScript && isPaused)
+		if (pauseIt && !isPaused) || (!pauseIt && isPaused)
 			PostMessage, 0x111, 65403,,, ahk_id %script_id% ; this toggles the current pause state.
 	}
-	return pauseScript
+	return pauseIt
 }
