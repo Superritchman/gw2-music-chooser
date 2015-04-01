@@ -32,6 +32,7 @@ PColor := "009E5A"	; Font-Color while playing 	- Default: 009E5A (7F7F7F = invis
 ; Code below must not be changed!
 ;***************************************************************************************************
 ; Some global settings
+#NoEnv
 #SingleInstance ignore
 DetectHiddenWindows, On
 SetTitleMatchMode, 2
