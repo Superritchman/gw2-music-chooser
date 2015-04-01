@@ -1,6 +1,6 @@
 ;**************************************************************************************************
 ; Music-Chooser by Superritchman
-; Version: 1.0.1
+; Version: 1.0.2
 ;
 ; # How to use?
 ;
@@ -135,16 +135,13 @@ return
 UpdateGui(MusicTitle, isPaused, show)
 {	
 	; Destroy old window (to handle resizing)
-	Gui, Music:Destroy
+	IfWinExist, TransSplashTextWindow	
+		Gui, Music:Destroy	
 	
 	; Update shown window
 	if(show) 
 	{
 		global PColor, SColor, FontSize	
-		; just in case settings are deleted
-		FontSize := FontSize?Fontsize:14		
-		SColor := SColor?SColor:"C94545"
-		PColor := PColor?PColor:"009E5A"
 		
 		Title := MusicTitle?MusicTitle:"Nothing to play"
 		Icon := (isPaused||!MusicTitle)?Chr(59):Chr(52)		
@@ -162,7 +159,7 @@ UpdateGui(MusicTitle, isPaused, show)
 		Gui, Music:+LastFound -Caption +AlwaysOnTop +ToolWindow
 		WinSet, TransColor, 7F7F7F
 		Gui, Music:Show, xCenter y0 AutoSize NoActivate, TransSplashTextWindow
-	}		
+	}	
 }
 
 ; Close the music-script
