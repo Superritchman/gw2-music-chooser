@@ -28,5 +28,6 @@ At the beginning of "Music-Chooser.ahk" you will find some settings.
 </ul>
 You can get hex-color-codes from http://www.colorpicker.com/
 ## Additional
+Required at least AHK-version 1.1.*
 Autohotkey is needed for playing ahk-scripts: http://www.autohotkey.com/<br>
 Get music scripts from http://gw2mb.com
