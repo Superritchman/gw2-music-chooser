@@ -22,6 +22,7 @@ Play easily your AHK-Music-Scripts and see which one is actually playing.
 At the beginning of "Music-Chooser.ahk" you will find some settings.
 <ul>
 <li>GUIShown (True, False): Choose if the GUI should displayed at launch</li>
+<li>MidOctave (True, False): Should the script switch to the middle octave before start playing?</li>
 <li>FontSize (any positive integer): Change the size of the font</li>
 <li>SColor (any Hex-Color): Color for pausing text</li>
 <li>PColor (any Hex-Color): Color for text while playing</li>

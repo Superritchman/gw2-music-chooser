@@ -21,11 +21,12 @@
 ; ESC: Close this script (and stop music)
 ;
 ; # Some extra infos
-; - This script will automatically set your instrument to the middle-octave!
+; - This script can automatically set your instrument to the middle-octave (does also work for instruments with only two octaves)
 ; - Once you choose a file, the 'Guild Wars 2' window have to become active to do any further actions.
 ;
 ; # GUI settings (feel free to change)
 GUIShown := True	; GUI visible at start?		- Default: True
+MidOctave := True	; Reset to middle octave	- Default: True
 FontSize := 14		; Font-Size of music title 	- Default: 14
 SColor := "C94545"	; Font-Color while pausing 	- Default: C94545 (7F7F7F = invisible font)
 PColor := "009E5A"	; Font-Color while playing 	- Default: 009E5A (7F7F7F = invisible font)
@@ -41,6 +42,8 @@ SetTitleMatchMode, 2
 ; Proof user settings
 if (GUIShown = "" || GUIShown is not boolean) 	
 	GUIShown := True
+if (MidOctave = "" || MidOctave is not boolean) 	
+	MidOctave := True	
 if (FontSize = "" || FontSize is not integer || FontSize < 1)	
 	FontSize := 14	
 if (SColor = "" || SColor is not xdigit)	
@@ -48,8 +51,8 @@ if (SColor = "" || SColor is not xdigit)
 if (PColor = "" || PColor is not xdigit)
 	PColor := "009E5A"
 
-; Draw gui at the beginning
-UpdateGui(Songname, MusicPaused, GUIShown)
+; Draw GUI at the beginning
+UpdateGui("", True, GUIShown)
 
 ; Ctrl + 1: Open a file chooser to chose your favorite music script
 ^1::
@@ -65,12 +68,15 @@ UpdateGui(Songname, MusicPaused, GUIShown)
 		WinWaitActive, %WindowTitle%
 		
 		; reset to middle octave
-		SendInput {Numpad9}
-		Sleep 550
-		SendInput {Numpad9}
-		Sleep 550
-		SendInput {Numpad0} 
-		Sleep 500
+		if(MidOctave)
+		{
+			SendInput {Numpad9}
+			Sleep 550
+			SendInput {Numpad9}
+			Sleep 550
+			SendInput {Numpad0} 
+			Sleep 500
+		}
 		
 		; Lets rock!
 		Run %SelectedFile%,,, MusicPID
@@ -99,6 +105,8 @@ UpdateGui(Songname, MusicPaused, GUIShown)
 			}
 		}
 	}
+	; redraw the GUI otherwise it will disappear
+	UpdateGui("", True, GUIShown)
 return
 
 ; Ctrl+2 to show GUI
