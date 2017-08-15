@@ -10,6 +10,7 @@ Play easily your AHK-Music-Scripts and see which one is actually playing.
 <li>If you're not already playing, then click somewhere in the Guild Wars window</li>
 <li>Rock like hell \(^o^)/</li>
 </ol>
+
 ## Hotkeys
 <ul>
 <li><b>Ctrl + 1</b>: Open a dialog to chose a music script to play</li>
@@ -18,6 +19,7 @@ Play easily your AHK-Music-Scripts and see which one is actually playing.
 <li><b>Numpad -</b>: Abort active music script</li>
 <li><b>ESC</b>: Close this script (and stop music)</li>
 </ul>
+
 ## Choose your Style
 At the beginning of "Music-Chooser.ahk" you will find some settings.
 <ul>
@@ -28,6 +30,7 @@ At the beginning of "Music-Chooser.ahk" you will find some settings.
 <li>PColor (any Hex-Color): Color for text while playing</li>
 </ul>
 You can get hex-color-codes from http://www.colorpicker.com/
+
 ## Additional
 Required at least AHK-version 1.1.* for playing ahk-scripts: http://www.autohotkey.com/<br>
 Get music scripts from http://gw2mb.com
